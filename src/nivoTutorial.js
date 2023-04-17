@@ -11,22 +11,44 @@ const languages = ['Python', 'JavaScript', 'Java', 'C#', 'C++', 'PHP'];
 
 // Bewertungen für User 1
 const user1Ratings = {
-    'JavaScript': 0.5, // Advanced Level
-    'PHP': 0.5, // Advanced Level
-    'Python': -1.5, // Unknown Level
-    'Java': -1.5, // Unknown Level
-    'C#': -1.5, // Unknown Level
-    'C++': -1.5, // Unknown Level
+    //user 1 is blue
+    'JavaScript': 0.5,
+    'PHP': 0.5,
+    'Python': 1.5,
+    'Java': -1.5,
+    'C#': -1.5,
+    'C++': -1.5,
 };
 
 // Bewertungen für User 2
 const user2Ratings = {
-    'JavaScript': -1.5, // Unknown Level
-    'PHP': -1.5, // Unknown Level
-    'Python': -1.5, // Unknown Level
-    'Java': 0.5, // Advanced Level
-    'C#': -1.5, // Unknown Level
-    'C++': 1.5, // Professional Level
+    //user 2 is orange
+    'JavaScript': 1,
+    'PHP': -1.5,
+    'Python': 0.5,
+    'Java': 0.5,
+    'C#': -1.5,
+    'C++': 1.5,
+};
+
+const user3Ratings = {
+    //user 3 is green
+    'JavaScript': 1.5,
+    'PHP': -1.5,
+    'Python': 1.0,
+    'Java': 1.5,
+    'C#': 0.5,
+    'C++': 1.5,
+};
+
+const user4Ratings = {
+    //user 4 is black
+    'JavaScript': 1.5,
+    'PHP': 0,
+    'Python': 0,
+    'Java': 1.5,
+    'C#': 0.5,
+    'C++': 1.5,
 };
 
 // Funktion zum Erstellen der Daten für einen User
@@ -45,6 +67,8 @@ function generateFakeUserData(username, ratings) {
 const data = [
     generateFakeUserData('User 1', user1Ratings),
     generateFakeUserData('User 2', user2Ratings),
+    generateFakeUserData('User 3', user3Ratings),
+    generateFakeUserData('User 4', user4Ratings),
 ];
 
 const MyScatterplot = () => {
@@ -61,7 +85,7 @@ const MyScatterplot = () => {
                 axisLeft={{ tickSize: 0, tickPadding: 10, tickRotation: 0, legend: 'Bewertung', legendPosition: 'middle' }}
                 width={600}
                 height={400}
-                colors={['#6495ED', '#FFA07A']}
+                colors={['#6495ED', '#FFA07A', '#00FF00', '#000000']}
                 dotSize={10}
                 dotBorderColor='#fff'
                 animate={true}
@@ -89,4 +113,5 @@ const MyScatterplot = () => {
 };
 
 export default MyScatterplot;
+
 
