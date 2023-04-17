@@ -108,6 +108,30 @@ const MyScatterplot = () => {
                     <div>{hoveredNode.data.username}</div>
                 </div>
             )}
+            <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '14px' }}>
+                <div style={{ display: 'inline-block', marginRight: '20px' }}>
+                    <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#6495ED', marginRight: '5px' }}></span>
+                    <div className="legend-user1">
+                        User 1
+                    </div>
+                </div>
+                <div style={{ display: 'inline-block', marginRight: '20px' }}>
+                    <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#FFA07A', marginRight: '5px' }}></span>
+                    <div className="legend-user2">User 2</div>
+                </div>
+                <div style={{ display: 'inline-block', marginRight: '20px' }}>
+                    <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#00FF00', marginRight: '5px' }}></span>
+                    <div className="legend-user3">
+                        User 3
+                    </div>
+                </div>
+                <div style={{ display: 'inline-block', marginRight: '20px' }}>
+                    <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#000000', marginRight: '5px' }}></span>
+                    <div className="legend-user4">
+                        User 4
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
