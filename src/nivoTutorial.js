@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ScatterPlot } from '@nivo/scatterplot';
 
-// Liste der Programmiersprachen
-const languages = ['Python', 'JavaScript', 'Java', 'C#', 'C++', 'PHP'];
+// Liste von Blogs
+const languages = ['Blog nature', 'Blog vulcano', 'Blog camping', 'Blog sea', 'Blog working', 'Blog swimming'];
 
 //professional = 1.5
 //advanced 0.5
@@ -12,43 +12,43 @@ const languages = ['Python', 'JavaScript', 'Java', 'C#', 'C++', 'PHP'];
 // Bewertungen für User 1
 const user1Ratings = {
     //user 1 is blue
-    'JavaScript': 0.5,
-    'PHP': 0.5,
-    'Python': 1.5,
-    'Java': -1.5,
-    'C#': -1.5,
-    'C++': -1.5,
+    'Blog nature': 0.5,
+    'Blog vulcano': 0.5,
+    'Blog camping': 1.5,
+    'Blog sea': -1.5,
+    'Blog working': -1.5,
+    'Blog swimming': -1.5,
 };
 
 // Bewertungen für User 2
 const user2Ratings = {
     //user 2 is orange
-    'JavaScript': 1,
-    'PHP': -1.5,
-    'Python': 0.5,
-    'Java': 0.5,
-    'C#': -1.5,
-    'C++': 1.5,
+    'Blog nature': 1,
+    'Blog vulcano': -1.5,
+    'Blog camping': 0.5,
+    'Blog sea': 0.5,
+    'Blog working': -1.5,
+    'Blog swimming': 1.5,
 };
 
 const user3Ratings = {
     //user 3 is green
-    'JavaScript': 1.5,
-    'PHP': -1.5,
-    'Python': 1.0,
-    'Java': 1.5,
-    'C#': 0.5,
-    'C++': 1.5,
+    'Blog nature': 1.5,
+    'Blog vulcano': -1.5,
+    'Blog camping': 1.0,
+    'Blog sea': 1.5,
+    'Blog working': 0.5,
+    'Blog swimming': 1.5,
 };
 
 const user4Ratings = {
     //user 4 is black
-    'JavaScript': 1.5,
-    'PHP': 0,
-    'Python': 0,
-    'Java': 1.5,
-    'C#': 0.5,
-    'C++': 1.5,
+    'Blog nature': 1.5,
+    'Blog vulcano': 0,
+    'Blog camping': 0,
+    'Blog sea': 1.5,
+    'Blog working': 0.5,
+    'Blog swimming': 1.5,
 };
 
 // Funktion zum Erstellen der Daten für einen User
@@ -74,6 +74,54 @@ const data = [
 const MyScatterplot = () => {
     const [hoveredNode, setHoveredNode] = useState(null);
 
+    const handleNodeHover = (node) => {
+        setHoveredNode(node);
+    };
+
+    const handleNodeLeave = () => {
+        setHoveredNode(null);
+    };
+
+    const renderTooltip = ({ node }) => {
+        return (
+            <div
+                style={{
+                    background: '#fff',
+                    padding: '9px 12px',
+                    border: '1px solid #ccc',
+                    color: node.color,
+                }}
+            >
+                <div>
+                    <strong>
+                        {node.data.username}: {node.data.language}
+                    </strong>
+                </div>
+                <div>Bewertung: {node.data.y}</div>
+            </div>
+        );
+    };
+
+    const renderLegend = () => {
+        const legendItems = [
+            { label: 'User 1', color: '#6495ED' },
+            { label: 'User 2', color: '#FFA07A' },
+            { label: 'User 3', color: '#00FF00' },
+            { label: 'User 4', color: '#000000' },
+        ];
+
+        return (
+            <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '14px' }}>
+                {legendItems.map((item) => (
+                    <div className="legend-item" key={item.label}>
+                        <span className="legend-circle" style={{ backgroundColor: item.color }}></span>
+                        <div className={`legend-${item.label.toLowerCase().replace(' ', '')}`}>{item.label}</div>
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div style={{ position: 'relative', backgroundColor: '#fff', padding: '20px' }}>
             <ScatterPlot
@@ -89,10 +137,12 @@ const MyScatterplot = () => {
                 dotSize={10}
                 dotBorderColor='#fff'
                 animate={true}
-                onMouseEnter={(node) => setHoveredNode(node)}
-                onMouseMove={(node) => setHoveredNode(node)}
-                onMouseLeave={() => setHoveredNode(null)}
+                onMouseEnter={handleNodeHover}
+                onMouseMove={handleNodeHover}
+                onMouseLeave={handleNodeLeave}
+                tooltip={renderTooltip}
             />
+
             {hoveredNode && (
                 <div
                     style={{
@@ -103,34 +153,16 @@ const MyScatterplot = () => {
                         border: '1px solid #ccc',
                         padding: '5px',
                     }}
-                >
-                    <div>{hoveredNode.data.language}</div>
-                    <div>{hoveredNode.data.username}</div>
-                </div>
+                ></div>
             )}
 
-            <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '14px' }}>
-                <div className="legend-item">
-                    <span className="legend-circle" style={{ backgroundColor: '#6495ED' }}></span>
-                    <div className="legend-user1">User 1</div>
-                </div>
-                <div className="legend-item">
-                    <span className="legend-circle" style={{ backgroundColor: '#FFA07A' }}></span>
-                    <div className="legend-user2">User 2</div>
-                </div>
-                <div className="legend-item">
-                    <span className="legend-circle" style={{ backgroundColor: '#00FF00' }}></span>
-                    <div className="legend-user3">User 3</div>
-                </div>
-                <div className="legend-item">
-                    <span className="legend-circle" style={{ backgroundColor: '#000000' }}></span>
-                    <div className="legend-user4">User 4</div>
-                </div>
-            </div>
+            {renderLegend()}
         </div>
     );
 };
 
 export default MyScatterplot;
+
+
 
 
